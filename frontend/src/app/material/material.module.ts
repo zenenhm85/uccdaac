@@ -13,6 +13,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import {MatTableModule} from '@angular/material/table';  
+import {MatSortModule} from '@angular/material/sort'; 
 
 
 
@@ -30,7 +31,8 @@ const MaterialComponents = [
   MatExpansionModule,
   MatSidenavModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule
 ]
 @NgModule({
   imports: [

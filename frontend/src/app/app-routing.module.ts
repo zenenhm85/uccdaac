@@ -4,6 +4,7 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { LoginComponent } from './modules/login/login.component';
+import {UnidadeComponent} from './components/unidade/unidade.component'; 
 
 
 
@@ -18,7 +19,11 @@ const routes: Routes = [
     {
       path:'posts',
       component:PostsComponent
-    }    
+    },
+    {
+      path:'unidade',
+      component:UnidadeComponent
+    }      
   ]
   },
   {

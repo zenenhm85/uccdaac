@@ -1,29 +1,25 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-icon-button (click)="toggleSideBar()">
-            <span> <i class="fa fa-bars fa-sm"></i> </span>            
-        </button>
-
-        <a routerLink="login"><img src="assets/image/cuito.jpg" alt="UCC" class="imgRedonda"></a>
+    <mat-toolbar-row>        
+        <a routerLink=""><img src="assets/image/cuito.jpg" alt="UCC" class="imgRedonda"></a>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
-                    <button mat-icon-button>
-                        <mat-icon><i class="fa fa-cog fa-sm"></i></mat-icon>
+                    <button mat-icon-button (click)="toggleSideBar()">
+                        <mat-icon class="botones"><i class="fa fa-bars fa-lg"></i></mat-icon>
                     </button>
                 </li>
                 <li>
                     <button mat-icon-button>
-                        <mat-icon><i class="fa fa-question-circle fa-sm"></i></mat-icon>
+                        <mat-icon class="botones"><i class="fa fa-question-circle fa-lg"></i></mat-icon>
                     </button>
                 </li>
                 <li>
-                    <button mat-button [matMenuTriggerFor]="menu">
-                        <mat-icon><i class="fa fa-user fa-sm"></i></mat-icon>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon class="botones"><i class="fa fa-user fa-lg"></i></mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item routerLink="/login">
                             <i class="fa fa-sign-out fa-sm"></i>
                             Sign out
                         </button>

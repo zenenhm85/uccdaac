@@ -4,5 +4,9 @@ ul li {
  .imgRedonda {
     width:30;
     height:30px;
-    border-radius:5px;
+    border-radius:30px;
+}
+.botones{
+  width: 100% !important;
+  height: 100% !important;
 }

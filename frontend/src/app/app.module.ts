@@ -15,12 +15,17 @@ import { LoginComponent } from './modules/login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material/material.module';
+import { UnidadeComponent } from './components/unidade/unidade.component';
+
+import {HttpClientModule} from '@angular/common/http';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    UnidadeComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { MaterialModule } from './material/material.module';
     DefaultModule,
     SharedModule,    
 
-    FlexLayoutModule
+    FlexLayoutModule,
+
+    HttpClientModule
   ],  
   providers: [],
   bootstrap: [AppComponent]
