@@ -15,5 +15,16 @@ body {
 .mat-sort-header-container{
     justify-content: center !important;
     text-align: center !important;
+    padding-left: 1rem;
+}
+.h1modulos{
+    text-align: center;
+}
+.search{
+    width: 100% !important;
+    height: 100%;
+}
+.exportar{
+    margin-right: 0.2rem !important;
 }
  

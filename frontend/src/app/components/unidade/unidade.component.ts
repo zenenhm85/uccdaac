@@ -17,11 +17,13 @@ export interface UnidadeElement {
 export class UnidadeComponent implements OnInit {
   
   
-  displayedColumns: string[] = ['nome','actions'];
+  displayedColumns: string[] = ['siglas','nome','actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatSort) sort : MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  searchKey:string;
 
   
 
@@ -39,11 +41,20 @@ export class UnidadeComponent implements OnInit {
         this.dataSource.sort = this.sort; 
         this.dataSource.paginator = this.paginator;    
         this.paginator._intl.itemsPerPageLabel= "Elementos por páginas"; 
-        this.paginator._intl.nextPageLabel= "Página seguinte";     
-        this.paginator._intl.previousPageLabel= "Página anterior";       
+        this.paginator._intl.nextPageLabel= "página seguinte";     
+        this.paginator._intl.previousPageLabel= "página anterior"; 
+        this.paginator._intl.firstPageLabel= "primeira página";
+        this.paginator._intl.lastPageLabel= "última página";      
       },
       err=> console.log(err) 
     );
+  }
+  limpiar(){
+    this.searchKey="";
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
+  }
+  Filtrar(){
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
   
 }
