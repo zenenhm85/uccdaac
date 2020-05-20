@@ -1,0 +1,50 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h2>Nombre completo</h2>
+            <h4>example@email.com</h4>
+        </div>
+        <img src="assets/image/muestra.jpg" alt="UCC">
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Pages</h2>
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <i class="fa fa-star"></i>Group Page # 1
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list role="list">
+                <mat-list-item role="listitem">
+                    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+                        Dashboard
+                    </a>
+                </mat-list-item>
+                <mat-list-item role="listitem"><a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">Posts</a></mat-list-item>
+                <mat-list-item role="listitem"><a mat-list-item routerLinkActive="list-item-active" routerLink="/articles">Articles</a></mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <i class="fa fa-film fa-sm"></i>Group Page # 2
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list role="list">
+                <mat-list-item role="listitem">Item 21</mat-list-item>
+                <mat-list-item role="listitem">Item 22</mat-list-item>
+                <mat-list-item role="listitem">Item 23</mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+    </mat-accordion>   
+    
+
+    <mat-divider></mat-divider>
+    <h2 matSubheader>Other things</h2>
+    
+
+</mat-nav-list>
