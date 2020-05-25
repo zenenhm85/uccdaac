@@ -1,0 +1,22 @@
+<mat-card class="cardedit">
+    <form #unidadeEditForm="ngForm" (ngSubmit)="editUnidades()">
+        <p>
+            <mat-form-field appearance="outline" class="matformedit">
+                <mat-label>Abreviatura</mat-label>
+                <input matInput name="nomeedit" #nomeedit="ngModel" [(ngModel)]="data.siglas" required>
+                <mat-hint align="end">Nome curto</mat-hint>
+                <small class="errorred" *ngIf="!nomeedit.valid && nomeedit.touched">O conteúdo não é válido</small>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline" class="matformedit">
+                <mat-label>Nome</mat-label>
+                <input matInput name="siglasedit" #siglasedit="ngModel" [(ngModel)]="data.nome" required>
+                <mat-hint align="end">Nome completo</mat-hint>
+                <small class="errorred" *ngIf="!nomeedit.valid && nomeedit.touched">O conteúdo não é válido</small>
+            </mat-form-field>
+        </p>
+        <button mat-button (click)="onNoClick()" class="matformedit">Cancelar</button>
+        <button mat-raised-button color="primary"  type="submit" [disabled]="unidadeEditForm.invalid" class="matformedit" [mat-dialog-close]="data">Alterar</button>
+    </form>  
+</mat-card>

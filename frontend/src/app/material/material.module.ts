@@ -14,6 +14,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import {MatTableModule} from '@angular/material/table';  
 import {MatSortModule} from '@angular/material/sort'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -32,7 +35,10 @@ const MaterialComponents = [
   MatSidenavModule,
   MatPaginatorModule,
   MatTableModule,
-  MatSortModule
+  MatSortModule,
+  MatTabsModule,
+  MatTooltipModule,
+  MatDialogModule 
 ]
 @NgModule({
   imports: [

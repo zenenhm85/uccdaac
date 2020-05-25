@@ -18,7 +18,9 @@ body {
     padding-left: 1rem;
 }
 .h1modulos{
-    text-align: center;
+    text-align: center !important;
+    padding-top: 1rem !important;
+    
 }
 .search{
     width: 100% !important;
@@ -27,4 +29,27 @@ body {
 .exportar{
     margin-right: 0.2rem !important;
 }
- 
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+.cardinserir{      
+    justify-content: center !important;
+    align-items: center !important;   
+    text-align: center;    
+}
+.cardedit{
+    justify-content: center !important;
+    align-items: center !important;   
+    text-align: center; 
+    width: 92%;
+}
+.matform{
+    width: 30%;
+}
+.matformedit{
+    width: 95%;
+}
+.errorred{
+    color: red;
+}

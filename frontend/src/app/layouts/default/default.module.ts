@@ -13,6 +13,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/modules/dashboard.service';
 
 import { MaterialModule } from 'src/app/material/material.module';
+import {FormsModule} from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -25,11 +28,12 @@ import { MaterialModule } from 'src/app/material/material.module';
     CommonModule,
     RouterModule,
     SharedModule,
+    FormsModule,
     
     FlexLayoutModule,
     
     MaterialModule
-  ],
+  ],  
   providers:[
     DashboardService
   ]
