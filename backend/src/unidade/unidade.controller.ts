@@ -59,6 +59,4 @@ export class UnidadeController {
             unidade
         });
     }
-
-
 }
