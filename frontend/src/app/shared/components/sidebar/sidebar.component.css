@@ -19,3 +19,7 @@
     font-family: Roboto, "Helvetica Neue", sans-serif !important;
     font-size: 0.9rem;  
 }
+:host mat-list mat-list-item a{
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 0.9rem;  
+}

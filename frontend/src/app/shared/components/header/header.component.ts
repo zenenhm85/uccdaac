@@ -22,5 +22,13 @@ export class HeaderComponent implements OnInit {
       );
     }, 300);
   }
+  logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('tipo');
+    localStorage.removeItem('email');
+    localStorage.removeItem('img');
+
+  }
 
 }

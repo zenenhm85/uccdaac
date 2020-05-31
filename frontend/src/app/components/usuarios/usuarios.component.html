@@ -1,0 +1,98 @@
+<h1 class="h1modulos">Gerir Usuários</h1>
+<mat-divider></mat-divider>
+<br>
+<mat-tab-group animationDuration="1500ms" [selectedIndex]="selected.value">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-list fa-lg"></i>&nbsp;
+            Lista
+        </ng-template>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <div fxFlex="63">
+
+            </div>
+            <div fxFlex="37">
+                <mat-form-field class="search">
+                    <input matInput [(ngModel)]="searchKey" placeholder="Procurar" autocomplete="off"
+                        (keyup)="Filtrar()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Apagar" (click)="limpiar()"
+                        *ngIf="searchKey">
+                        <i class="fa fa-times-circle-o fa-lg"></i>
+                    </button>
+                </mat-form-field>
+            </div>
+            
+        </div>
+        <br>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <div fxFlex="100">
+                <div class="mat-elevation-z8" id="userTable">
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>No.</b></th>
+                            <td mat-cell *matCellDef="let index = index"> {{index+1}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>NOME</b></th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><b>EMAIL</b></th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef><b>AÇÕES</b></th>
+                            <td mat-cell *matCellDef="let row">
+                                <button mat-icon-button matTooltip="Alterar" matTooltipPosition="above">
+                                    <mat-icon><i class="fa fa-pencil-square-o fa-lg"></i></mat-icon>
+                                </button>
+                                <button mat-icon-button color="warn" matTooltip="Excluir" matTooltipPosition="above"
+                                    >
+                                    <mat-icon><i class="fa fa-trash fa-lg"></i></mat-icon>
+                                </button>
+                                <button mat-icon-button  matTooltip="Informação" matTooltipPosition="above"
+                                    >
+                                    <mat-icon><i class="fa fa-info-circle fa-lg"></i></mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageSize]="10" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa fa-plus-circle fa-lg"></i>&nbsp;
+            Inserir
+        </ng-template>
+        <mat-card class="cardinserir">
+            <!--<form #unidadeForm="ngForm" >
+                <p>
+                    <mat-form-field appearance="outline" class="matform">
+                        <mat-label>Abreviatura</mat-label>
+                        <input matInput name="nome" #nome="ngModel" [(ngModel)]="unidade.siglas" required>
+                        <mat-hint align="end">Nome curto</mat-hint>
+                        <small class="errorred" *ngIf="!nome.valid && nome.touched">O conteúdo não é válido</small>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline" class="matform">
+                        <mat-label>Nome</mat-label>
+                        <input matInput name="siglas" #siglas="ngModel" [(ngModel)]="unidade.nome" required>
+                        <mat-hint align="end">Nome completo</mat-hint>
+                        <small class="errorred" *ngIf="!siglas.valid && siglas.touched">O conteúdo não é válido</small>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" class="matform" type="submit"
+                    [disabled]="unidadeForm.invalid">Inserir</button>
+            </form>-->
+        </mat-card>
+
+    </mat-tab>
+
+</mat-tab-group>

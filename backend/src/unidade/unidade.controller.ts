@@ -1,8 +1,11 @@
-import { Controller, Post, Res, HttpStatus, Body, Get, Param, NotFoundException, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Res, HttpStatus, Body, Get, Param, NotFoundException, Delete, Put, UseGuards} from '@nestjs/common';
 
 import { CreateUnidadeDTO } from './dto/unidade.dto';
 import { UnidadeService } from './unidade.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+
+@UseGuards(JwtAuthGuard)
 @Controller('unidade')
 export class UnidadeController {
 

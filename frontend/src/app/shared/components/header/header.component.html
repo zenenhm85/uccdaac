@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>        
-        <a routerLink=""><img src="assets/image/cuito.jpg" alt="UCC" class="imgRedonda"></a>
+        <a routerLink="/home"><img src="assets/image/cuito.jpg" alt="UCC" class="imgRedonda"></a>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
@@ -19,13 +19,13 @@
                         <mat-icon class="botones"><i class="fa fa-user fa-lg"></i></mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item routerLink="/login">
+                        <button mat-menu-item routerLink="" (click)="logOut()">
                             <i class="fa fa-sign-out fa-sm"></i>
-                            Sign out
+                            Sair
                         </button>
                         <button mat-menu-item>
-                            <i class="fa fa-edit fa-sm"></i>
-                            Edit profile
+                            <i class="fa fa-key fa-sm"></i>
+                            Trocar senha
                         </button>
                     </mat-menu>
                 </li>

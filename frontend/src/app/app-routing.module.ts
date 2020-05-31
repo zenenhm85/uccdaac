@@ -5,13 +5,19 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { LoginComponent } from './modules/login/login.component';
 import {UnidadeComponent} from './components/unidade/unidade.component'; 
+import {UsuariosComponent} from './components/usuarios/usuarios.component';
+
+
+import {AuthGuard} from './auth.guard';
+import { AdminGuard } from './admin.guard';
 
 
 
 const routes: Routes = [
   {
-    path:'',
+    path:'home',
     component:DefaultComponent,
+    canActivate:[AuthGuard],
     children:[{
       path:'',
       component:DashboardComponent
@@ -22,12 +28,18 @@ const routes: Routes = [
     },
     {
       path:'unidade',
-      component:UnidadeComponent
+      component:UnidadeComponent,
+      canActivate:[AdminGuard]
+    },
+    {
+      path:'usuarios',
+      component:UsuariosComponent,
+      canActivate:[AdminGuard]
     }      
   ]
   },
   {
-    path:'login',
+    path:'',
     component:LoginComponent
   }
 ];

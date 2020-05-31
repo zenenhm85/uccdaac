@@ -14,8 +14,7 @@ export class UnidadeService {
     constructor(
         private _http:HttpClient
     ){
-        this.url = Global.url;
-        
+        this.url = Global.url;        
     }
     getUnidades():Observable<Unidade[]>{
       return this._http.get<Unidade[]>(this.url+'unidade');
