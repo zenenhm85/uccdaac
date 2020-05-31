@@ -47,9 +47,17 @@ body {
 .matform{
     width: 30%;
 }
+.matform2{
+    width: 99%;
+}
 .matformedit{
     width: 95%;
 }
 .errorred{
     color: red;
+}
+.afu-attach-pin{
+    display: block !important;
+    width:  99% !important;   
+    margin-top: 15px !important;
 }

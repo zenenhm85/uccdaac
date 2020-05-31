@@ -21,7 +21,7 @@
                     </button>
                 </mat-form-field>
             </div>
-            
+
         </div>
         <br>
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
@@ -46,12 +46,10 @@
                                 <button mat-icon-button matTooltip="Alterar" matTooltipPosition="above">
                                     <mat-icon><i class="fa fa-pencil-square-o fa-lg"></i></mat-icon>
                                 </button>
-                                <button mat-icon-button color="warn" matTooltip="Excluir" matTooltipPosition="above"
-                                    >
+                                <button mat-icon-button color="warn" matTooltip="Excluir" matTooltipPosition="above">
                                     <mat-icon><i class="fa fa-trash fa-lg"></i></mat-icon>
                                 </button>
-                                <button mat-icon-button  matTooltip="Informação" matTooltipPosition="above"
-                                    >
+                                <button mat-icon-button matTooltip="Informação" matTooltipPosition="above">
                                     <mat-icon><i class="fa fa-info-circle fa-lg"></i></mat-icon>
                                 </button>
                             </td>
@@ -71,26 +69,92 @@
             Inserir
         </ng-template>
         <mat-card class="cardinserir">
-            <!--<form #unidadeForm="ngForm" >
-                <p>
-                    <mat-form-field appearance="outline" class="matform">
-                        <mat-label>Abreviatura</mat-label>
-                        <input matInput name="nome" #nome="ngModel" [(ngModel)]="unidade.siglas" required>
-                        <mat-hint align="end">Nome curto</mat-hint>
-                        <small class="errorred" *ngIf="!nome.valid && nome.touched">O conteúdo não é válido</small>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline" class="matform">
-                        <mat-label>Nome</mat-label>
-                        <input matInput name="siglas" #siglas="ngModel" [(ngModel)]="unidade.nome" required>
-                        <mat-hint align="end">Nome completo</mat-hint>
-                        <small class="errorred" *ngIf="!siglas.valid && siglas.touched">O conteúdo não é válido</small>
-                    </mat-form-field>
-                </p>
-                <button mat-raised-button color="primary" class="matform" type="submit"
-                    [disabled]="unidadeForm.invalid">Inserir</button>
-            </form>-->
+
+            <form #usuarioForm="ngForm" (ngSubmit)="createUsers()">
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <div fxFlex="50">
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Nome completo</mat-label>
+                                <input matInput name="name" #name="ngModel" [(ngModel)]="user.name" required>
+                                <mat-hint align="end">Nome e sobrenomes</mat-hint>
+                                <small class="errorred" *ngIf="!name.valid && name.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Nome de Usuário</mat-label>
+                                <input matInput name="username" #username="ngModel" [(ngModel)]="user.username"
+                                    required>
+                                <mat-hint align="end">Identificador do usuário para login</mat-hint>
+                                <small class="errorred" *ngIf="!username.valid && username.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Senha</mat-label>
+                                <input matInput type="password" name="password" #password="ngModel"
+                                    [(ngModel)]="user.password" required minlength="6">
+                                <mat-hint align="end">mais de 5 caracteres</mat-hint>
+                                <small class="errorred" *ngIf="!password.valid && password.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Repetir Senha</mat-label>
+                                <input matInput type="password" name="password2" #password2="ngModel"
+                                    [(ngModel)]="user2.password" required minlength="6">
+                                <mat-hint align="end">igual a anterior</mat-hint>
+                                <small class="errorred" *ngIf="!password2.valid && password2.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                    </div>
+                    <div fxFlex="50">
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Email</mat-label>
+                                <input type="email" matInput name="email" #email="ngModel" [(ngModel)]="user.email"
+                                    required>
+                                <mat-hint align="end">Correio eletrônico</mat-hint>
+                                <small class="errorred" *ngIf="!email.valid && email.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Habilitado</mat-label>
+                                <input matInput name="username" #username="ngModel" [(ngModel)]="user.username"
+                                    required>
+                                <mat-hint align="end">Identificador do usuário para login</mat-hint>
+                                <small class="errorred" *ngIf="!username.valid && username.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="matform2">
+                                <mat-label>Tipo</mat-label>
+                                <input matInput type="password" name="password" #password="ngModel"
+                                    [(ngModel)]="user.password" required>
+                                <mat-hint align="end">mais de 5 caracteres</mat-hint>
+                                <small class="errorred" *ngIf="!password.valid && password.touched">O conteúdo não é
+                                    válido</small>
+                            </mat-form-field>
+                        </p>
+                        <div class="form-group">
+                            <angular-file-uploader [config]="afuConfig" (ApiResponse)="imageUpload($event)">
+                            </angular-file-uploader>
+                        </div>
+                    </div>
+                </div>
+                <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid"
+                    class="matform2">Inserir</button>
+
+            </form>
+
         </mat-card>
 
     </mat-tab>

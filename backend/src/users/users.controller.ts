@@ -31,10 +31,10 @@ export class UsersController {
             users
         });
     }
-    
+    @UseGuards(JwtAuthGuard)
     @Post()
     @UseInterceptors(
-        FileInterceptor('image', {
+        FileInterceptor('file0', {
             storage: diskStorage({
                 destination: './uploads',
                 filename: editFileName

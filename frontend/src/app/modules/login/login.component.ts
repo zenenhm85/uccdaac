@@ -51,7 +51,12 @@ export class LoginComponent implements OnInit {
           }
         )                                
       },
-      err => console.log(err)
+      err => {
+        swal({
+          title: "Error de autenticação!",          
+          icon: "warning"
+        });
+      }
     );
   }
 
