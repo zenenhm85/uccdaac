@@ -6,11 +6,12 @@ import { UserService } from '../../services/user.service';
 import { ExportarexcelService } from '../../services/exportarexcel.service';
 import { User, UserCreate } from '../../models/user';
 import swal from 'sweetalert';
-
 import { MatDialog } from '@angular/material/dialog';
 import { Global } from '../../services/url';
 import { FormControl } from '@angular/forms';
 import * as bcrypt from 'bcryptjs';
+import {InfouserComponent} from './infouser/infouser.component';
+import {EdituserComponent} from './edituser/edituser.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -31,6 +32,8 @@ export class UsuariosComponent implements OnInit {
   user: UserCreate;
   user2: UserCreate;
   userinfo: User;
+  useredit:User;
+  useredit2:User;
   url:string;
   img:string;
 
@@ -65,7 +68,7 @@ export class UsuariosComponent implements OnInit {
 
 
 
-  constructor(private userService: UserService, private exportxls: ExportarexcelService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private exportxls: ExportarexcelService, private dialog: MatDialog, private dialogedit: MatDialog) {
 
   }
 
@@ -200,17 +203,35 @@ export class UsuariosComponent implements OnInit {
           swal("Tranqüilo(a),não ocorreu nada!!");
         }
       });
+  }  
+  infoDialog(row): void {
+    this.userinfo = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img);   
+    const dialogRef = this.dialog.open(InfouserComponent, {
+      width: '600px',
+      data: this.userinfo
+    });    
   }
-  informationUser(row){  
-    
-    this.userinfo = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img);
-    
-  
-  }
-  tabchange0(){
-    
-    console.log(this.selected.value);
-
+  editDialog(row){
+    this.useredit = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img); 
+    this.useredit2 = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img); 
+   
+    const dialogRef = this.dialogedit.open(EdituserComponent, {
+      width: '700px',
+      data: this.useredit
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      const probando: User = result;      
+      if(probando != undefined){
+        if (!(JSON.stringify(probando) === JSON.stringify(this.useredit2))) {
+          swal({
+            title: "Excelente!",
+            text: "Usuário alterado com sucesso!!",
+            icon: "success"
+          });
+          this.getUsers();
+        }
+      }      
+    });
   }
 
 }

@@ -4,8 +4,10 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserModel } from './interface/user.interface';
-import { CreateUserDTO, CreateUserDTO2 } from './dto/user.dto';
+import { CreateUserDTO, CreateUserDTO2, CreateUserDTO3 } from './dto/user.dto';
 import * as bcrypt from 'bcryptjs';
+import * as path from 'path';
+import * as fs from 'fs-extra';
 
 
 
@@ -54,7 +56,7 @@ export class UsersService {
     let userObj: UserModel;
     const users = await this.usersModel.find();
     for (const hash of users) {
-      const userExists = await bcrypt.compare(username, hash.username);
+      const userExists = await bcrypt.compare(username, hash.username);      
       if (userExists) {
         userObj = { username: hash.username, name: hash.name, email: hash.email, habilitado: hash.habilitado, tipo: hash.tipo, img: hash.img };
         return userObj;
@@ -73,6 +75,13 @@ export class UsersService {
 
   async deleteUser(userID: string): Promise<User> {
     const user = await this.usersModel.findByIdAndDelete(userID);
+    if (user.img != "default.png") {
+      fs.unlink(path.resolve('./uploads/' + user.img));
+    }
     return user;
+  }
+  async updateUser(userID: string, createuserDTO: CreateUserDTO3): Promise<User> {
+    const updateUser = this.usersModel.findByIdAndUpdate(userID, createuserDTO, { new: true });
+    return updateUser;
   }
 }

@@ -1,0 +1,11 @@
+
+{
+    "tipo" : 1,
+    "name" : "Adrián Dario Gonzáles Menas",
+    "username" : "$2a$10$CBOJfb0DKn6FlITedrZ7a.fNnM2fNhcXb.HLM3kVAeFThxwSMLSXW",
+    "password" : "$2a$10$9fZD/3XKy6WI37EO3wB0hOJg0n5Aas.aCtWD.LiH0zXmQ5/Wz8TaC",
+    "phone" : "876876487",
+    "email" : "dariogonzalez@gmail.com",
+    "habilitado" : true,
+    "img" : "default.png"   
+}

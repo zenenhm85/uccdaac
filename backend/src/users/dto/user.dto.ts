@@ -11,3 +11,12 @@ export class CreateUserDTO2 {
     public tipo: number;
     public img: string;
 }
+export class CreateUserDTO3 {
+    public username:string;   
+    public name:string;
+    public password:string;    
+    public email:string;
+    public habilitado:number;
+    public tipo:number;
+    public img:string ;
+}

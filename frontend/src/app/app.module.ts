@@ -19,6 +19,8 @@ import {AdminGuard} from './admin.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { InfouserComponent } from './components/usuarios/infouser/infouser.component';
+import { EdituserComponent } from './components/usuarios/edituser/edituser.component';
 
 
 
@@ -29,7 +31,9 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     LoginComponent,
     UnidadeComponent,
     EditunidadeComponent,
-    UsuariosComponent    
+    UsuariosComponent,
+    InfouserComponent,
+    EdituserComponent    
   ],
   imports: [
     BrowserModule,

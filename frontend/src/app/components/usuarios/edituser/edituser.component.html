@@ -1,0 +1,73 @@
+<form #usuarioEditForm="ngForm" (ngSubmit)="editUser()">
+    <div fxLayout="row" fxLayoutGap="20px">
+        <div fxFlex="50">
+            <p>
+                <mat-form-field appearance="outline" class="matform2">
+                    <mat-label>Nome completo</mat-label>
+                    <input matInput name="name" #name="ngModel" [(ngModel)]="user.name" required>
+                    <mat-hint align="end">Nome e sobrenomes</mat-hint>
+                    <small class="errorred" *ngIf="!name.valid && name.touched">O conteúdo não é
+                        válido</small>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline" class="matform2">
+                    <mat-label>Nome de Usuário</mat-label>
+                    <input matInput name="username" #username="ngModel" [(ngModel)]="data.username" (keypress)="restrictEspace($event)">
+                    <mat-hint align="end">Identificador do usuário para login</mat-hint>                    
+                </mat-form-field>
+            </p> 
+            <p>
+                <mat-radio-group aria-labelledby="Condição do usuário" class="matform2"
+                    #habilitado="ngModel" [(ngModel)]="user.habilitado" name="habilitado">
+                    <mat-radio-button class="example-radio-button" [value]="true">
+                        Habilitado
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" [value]="false">
+                        Desabilitado
+                    </mat-radio-button>
+                </mat-radio-group>
+            </p>
+            <div class="form-group">
+                <angular-file-uploader [config]="afuConfig" (ApiResponse)="imageUpload($event)">
+                </angular-file-uploader>
+            </div>           
+        </div>
+        <div fxFlex="50">
+            <p>
+                <mat-form-field appearance="outline" class="matform2">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput name="email" #email="ngModel" [(ngModel)]="user.email"
+                        required pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+                    <mat-hint align="end">Correio eletrônico</mat-hint>
+                    <small class="errorred" *ngIf="!email.valid && email.touched">O conteúdo não é
+                        válido. Formato de email incorreto</small>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline" class="matform2">
+                    <mat-label>Telefone</mat-label>
+                    <input type="phone" matInput name="phone" #phone="ngModel" [(ngModel)]="user.phone"
+                        required maxlength="9" minlength="9" pattern="[0-9]*"
+                        (keypress)="restrictNumeric($event)">
+                    <mat-hint align="end">Número de telefone</mat-hint>
+                    <small class="errorred" *ngIf="!phone.valid && phone.touched">O conteúdo não é
+                        válido. Devem ser 9 dígitos</small>
+                </mat-form-field>
+            </p>
+            
+            <p>
+                <mat-form-field class="matform2">
+                    <mat-label>Tipo de usuário</mat-label>
+                    <mat-select #tipo="ngModel" [(ngModel)]="user.tipo" name="tipo" required>
+                        <mat-option [value]="1">Administrador</mat-option>
+                        <mat-option [value]="2">Operador DAAC</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>           
+        </div>
+    </div>
+    <button mat-button (click)="onNoClick()" class="matformedit">Cancelar</button>
+    <button mat-raised-button color="primary"  type="submit" [disabled]="usuarioEditForm.invalid" class="matformedit" [mat-dialog-close]="user">Alterar</button>
+
+</form>

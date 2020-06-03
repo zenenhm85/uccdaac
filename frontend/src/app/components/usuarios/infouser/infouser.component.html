@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <div fxFlex="48">        
+            <img src="{{img+data.img}}" alt="AvatarProfile" class="imginfo">        
+    </div>
+    <div fxFlex="48" >
+        <p><b>Nome:</b> {{data.name}}</p> 
+        <p><b>Email:</b> {{data.email}}</p>    
+        <p><b>Telefone:</b> {{data.phone}}</p>  
+        <p  *ngIf="data.habilitado; else elseBlock"><b>Habilitado:</b> Sim</p>
+        <ng-template #elseBlock>
+            <p ><b>Habilitado:</b> Não</p>
+        </ng-template> 
+        <p *ngIf="data.tipo==1"><b>Tipo:</b> Administrador</p>
+        <p *ngIf="data.tipo==2"><b>Tipo:</b> Operador DAAC</p>
+        <p *ngIf="data.tipo==3"><b>Tipo:</b> Professor</p>        
+
+        <button mat-button (click)="onNoClick()" color="primary" class="btninfo">Cancelar</button>      
+        
+    </div>  
+</div>        
