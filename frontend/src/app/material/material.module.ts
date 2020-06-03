@@ -17,6 +17,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio'; 
+
 
 
 
@@ -38,7 +40,8 @@ const MaterialComponents = [
   MatSortModule,
   MatTabsModule,
   MatTooltipModule,
-  MatDialogModule 
+  MatDialogModule,
+  MatRadioModule
 ]
 @NgModule({
   imports: [

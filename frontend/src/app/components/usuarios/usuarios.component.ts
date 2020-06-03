@@ -6,11 +6,11 @@ import { UserService } from '../../services/user.service';
 import { ExportarexcelService } from '../../services/exportarexcel.service';
 import { User, UserCreate } from '../../models/user';
 import swal from 'sweetalert';
-import * as jsPDF from 'jspdf';
-import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import {Global} from '../../services/url';
 
+import { MatDialog } from '@angular/material/dialog';
+import { Global } from '../../services/url';
+import { FormControl } from '@angular/forms';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -20,17 +20,20 @@ import {Global} from '../../services/url';
 export class UsuariosComponent implements OnInit {
 
   selected = new FormControl(0);
-  displayedColumns: string[] = ['no', 'name', 'email', 'actions'];
+  displayedColumns: string[] = ['no','img','name', 'email','phone', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  
+
   searchKey: string;
-  user: UserCreate
-  user2: UserCreate
-  
+  user: UserCreate;
+  user2: UserCreate;
+  userinfo: User;
+  url:string;
+  img:string;
+
 
   users: User[];
 
@@ -38,12 +41,12 @@ export class UsuariosComponent implements OnInit {
     multiple: false,
     formatsAllowed: ".jpg,.png,.gif,.jpeg",
     maxSize: "10",
-    uploadAPI:  {
-      url:Global.url+'users',
+    uploadAPI: {
+      url: Global.url + 'users',
       headers: {
-        "Content-Type" : "text/plain;charset=UTF-8",
-        "Authorization" : `Bearer ${localStorage.getItem('token')}`
-         },
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
     },
     theme: "attachPin",
     hideProgressBar: true,
@@ -58,19 +61,22 @@ export class UsuariosComponent implements OnInit {
       afterUploadMsg_success: 'Successfully Uploaded !',
       afterUploadMsg_error: 'Upload Failed !'
     }
-};
+  };
 
 
 
   constructor(private userService: UserService, private exportxls: ExportarexcelService, private dialog: MatDialog) {
 
-
   }
 
   ngOnInit(): void {
-    this.user = new UserCreate('', '', '', '', 1, 1, '');
-    this.user2 = new UserCreate('', '', '', '', 1, 1, '');
-    
+    this.url = Global.url;
+    this.img = this.url+"users/img/";
+    this.user = new UserCreate('', '', '', '', '', true, 1, '');
+    this.user2 = new UserCreate('', '', '', '', '', true, 1, '');
+    this.userinfo = new User('','','','',true,1,'');
+    this.user.habilitado = true;
+    this.user.tipo = 1;
 
     this.userService.getUsers().subscribe(
       res => {
@@ -87,6 +93,24 @@ export class UsuariosComponent implements OnInit {
       err => console.log(err)
     );
   }
+  getUsers() {
+    this.userService.getUsers().subscribe(
+      res => {
+        this.users = res['users'];
+        this.dataSource = new MatTableDataSource(this.users);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.paginator._intl.itemsPerPageLabel = "Elementos por páginas";
+        this.paginator._intl.nextPageLabel = "página seguinte";
+        this.paginator._intl.previousPageLabel = "página anterior";
+        this.paginator._intl.firstPageLabel = "primeira página";
+        this.paginator._intl.lastPageLabel = "última página";
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
   limpiar() {
     this.searchKey = "";
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
@@ -94,13 +118,99 @@ export class UsuariosComponent implements OnInit {
   Filtrar() {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
-  imageUpload(data){
-
-    console.log(data.body.filename);
-
+  imageUpload(data) {
+    this.user.img = data.body.filename;
   }
-
+  public restrictNumeric(e) {
+    let input;
+    if (e.metaKey || e.ctrlKey) {
+      return true;
+    }
+    if (e.which === 32) {
+      return false;
+    }
+    if (e.which === 0) {
+      return true;
+    }
+    if (e.which < 33) {
+      return true;
+    }
+    input = String.fromCharCode(e.which);
+    return !!/[\d\s]/.test(input);
+  }
   createUsers() {
+    
+    if (this.user.password == this.user2.password) {
+      let username = this.user.username;
+      let userpassword = this.user.password;
+      var saltu = bcrypt.genSaltSync(10);
+      var hashu = bcrypt.hashSync(username, saltu);
+      var saltp = bcrypt.genSaltSync(10);
+      var hashp = bcrypt.hashSync(userpassword, saltp);
+      this.user.username = hashu;
+      this.user.password = hashp;
+      if(this.user.img == ""){
+        this.user.img = "default.png"
+      }
+
+      this.userService.createUser(this.user).subscribe(
+        res => {
+          this.getUsers();
+          this.user = new UserCreate('', '', '', '', '', true, 1, '');
+          this.user2 = new UserCreate('', '', '', '', '', true, 1, '');
+          swal({
+            title: "Excelente!",
+            text: "Usuário criado com sucesso!!",
+            icon: "success"
+          });
+        },
+        err => console.log(err)
+      );
+    }
+    else {
+      swal({
+        title: "Erro de senha!",
+        text: "Não coincidem as senhas!!",
+        icon: "error"
+      });      
+    }
+  }
+  deleteUser(userID: string) {
+    
+    swal({
+      title: "Está seguro(a)?",
+      text: "Não poderá desfazer esta operação!",
+      icon: "warning",
+      buttons: ['Cancelar', 'Aceitar'],
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.userService.deleteUser(userID).subscribe(
+            res => {
+              swal("Poof! Sua operação se realizou com sucesso!", {
+                icon: "success",
+              });
+              this.getUsers();
+            },
+            err => console.log(err)
+          );
+        }
+        else {
+          swal("Tranqüilo(a),não ocorreu nada!!");
+        }
+      });
+  }
+  informationUser(row){  
+    
+    this.userinfo = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img);
+    
+  
+  }
+  tabchange0(){
+    
+    console.log(this.selected.value);
 
   }
+
 }

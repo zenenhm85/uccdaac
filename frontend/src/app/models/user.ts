@@ -4,7 +4,8 @@ export class User{
         public name:string,
         public username:string,
         public email:string,
-        public habilitado:number,
+        public phone:string,
+        public habilitado:boolean,
         public tipo:number,
         public img:string
         ){
@@ -17,8 +18,9 @@ export class UserCreate{
         public name:string,
         public username:string,
         public password:string,
+        public phone:string,
         public email:string,
-        public habilitado:number,
+        public habilitado:boolean,
         public tipo:number,
         public img:string
         ){

@@ -37,8 +37,15 @@ export class UserService {
     getToken(){
       return localStorage.getItem('token');
     }
+    
     /***********************Comenzando con Componente usuario**********************/
     getUsers():Observable<User[]>{
       return this._http.get<User[]>(this.url+'users');
+    }
+    createUser(user:User):Observable<User>{
+      return this._http.post<User>(this.url+'users/create',user);      
+    }
+    deleteUser(userID:string):Observable<User>{
+      return this._http.delete<User>(this.url+'users/delete/'+userID);      
     }
 }

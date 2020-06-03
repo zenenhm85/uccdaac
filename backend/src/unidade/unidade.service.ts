@@ -24,7 +24,6 @@ export class UnidadeService {
     async createUnidade(createUnidadeDTO:CreateUnidadeDTO):Promise<Unidade>{
         const unidade = new this.unidadeModel(createUnidadeDTO);
         return await unidade.save();
-
     }
     async updateUnidade(unidadeID:string,createUnidadeDTO:CreateUnidadeDTO):Promise<Unidade>{
         const updatedUnidade = this.unidadeModel.findByIdAndUpdate(unidadeID,createUnidadeDTO,{new:true});
