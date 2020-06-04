@@ -64,6 +64,10 @@ export class UsersService {
     }
     return null;
   }
+  async getUserhash(username:string):Promise<User>{
+    const user = await this.usersModel.findOne({username:username});
+    return user;
+  }
   async getUsers(): Promise<User[]> {
     const users = await this.usersModel.find();
     return users;
@@ -82,6 +86,17 @@ export class UsersService {
   }
   async updateUser(userID: string, createuserDTO: CreateUserDTO3): Promise<User> {
     const updateUser = this.usersModel.findByIdAndUpdate(userID, createuserDTO, { new: true });
+    return updateUser;
+  }
+  async deleteImg(img:string):Promise<any>{
+    if (img != "default.png") {
+      fs.unlink(path.resolve('./uploads/' + img));
+      return true;
+    }       
+    return false;
+  }
+  async changePassword(createUserDTO: CreateUserDTO): Promise<User> {
+    const updateUser = this.usersModel.findOneAndUpdate({username:createUserDTO.username},{password:createUserDTO.password});
     return updateUser;
   }
 }

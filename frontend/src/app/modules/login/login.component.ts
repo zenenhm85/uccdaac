@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('tipo',res['user'].tipo.toString());
               localStorage.setItem('email',res['user'].email);
               localStorage.setItem('img',res['user'].img);
+              localStorage.setItem('username',res['user'].username);
             }
             else{
               localStorage.removeItem('token');

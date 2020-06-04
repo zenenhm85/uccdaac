@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('tipo');
     localStorage.removeItem('email');
     localStorage.removeItem('img');
-
+    localStorage.removeItem('username');
   }
 
 }

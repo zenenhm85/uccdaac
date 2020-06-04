@@ -3,7 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import {Observable, from} from 'rxjs';
 import { UserLogin } from '../models/userlogin';
 import { Global } from './url';
-import {User} from '../models/user';
+import {User, UserCreate} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,9 @@ export class UserService {
     }
     
     /***********************Comenzando con Componente usuario**********************/
+    getUserHash(username:string):Observable<UserCreate>{
+      return this._http.get<any>(this.url+'users/userhash/'+username);
+    }
     getUsers():Observable<User[]>{
       return this._http.get<User[]>(this.url+'users');
     }
@@ -47,5 +50,15 @@ export class UserService {
     }
     deleteUser(userID:string):Observable<User>{
       return this._http.delete<User>(this.url+'users/delete/'+userID);      
+    }
+    deleteImage(img:string):Observable<any>{
+      
+      return this._http.get<any>(this.url+'users/image/'+img);      
+    }
+    updateUser(userID:string,user:User ):Observable<User>{      
+      return this._http.put<User>(this.url+'users/update/'+userID,user);      
+    }
+    changePassword(user:UserLogin):Observable<User>{
+      return this._http.post<any>(this.url+'users/change',user);      
     }
 }

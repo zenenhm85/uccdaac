@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot(
       { isGlobal: true },
     ),
-    MongooseModule.forRoot('mongodb://localhost/uccdaac',{useCreateIndex: true,useNewUrlParser: true}),
+    MongooseModule.forRoot('mongodb://localhost/uccdaac',{useCreateIndex: true,useNewUrlParser: true,useFindAndModify: false}),
     MulterModule.register({
       dest:'./uploads'
     }),

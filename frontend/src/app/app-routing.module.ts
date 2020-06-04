@@ -6,6 +6,7 @@ import { PostsComponent } from './modules/posts/posts.component';
 import { LoginComponent } from './modules/login/login.component';
 import {UnidadeComponent} from './components/unidade/unidade.component'; 
 import {UsuariosComponent} from './components/usuarios/usuarios.component';
+import { ChangepasswordComponent } from './components/usuarios/changepassword/changepassword.component';
 
 
 import {AuthGuard} from './auth.guard';
@@ -35,7 +36,11 @@ const routes: Routes = [
       path:'usuarios',
       component:UsuariosComponent,
       canActivate:[AdminGuard]
-    }      
+    },
+    {
+      path:'trocarsenha',
+      component:ChangepasswordComponent
+    }       
   ]
   },
   {

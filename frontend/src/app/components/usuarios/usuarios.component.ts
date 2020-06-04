@@ -213,11 +213,11 @@ export class UsuariosComponent implements OnInit {
   }
   editDialog(row){
     this.useredit = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img); 
-    this.useredit2 = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img); 
-   
+    this.useredit2 = new User(row.name,row.username,row.email,row.phone,row.habilitado,row.tipo,row.img);
+      
     const dialogRef = this.dialogedit.open(EdituserComponent, {
       width: '700px',
-      data: this.useredit
+      data: {data:this.useredit, id:row._id}
     });
     dialogRef.afterClosed().subscribe(result => {
       const probando: User = result;      
@@ -227,10 +227,13 @@ export class UsuariosComponent implements OnInit {
             title: "Excelente!",
             text: "Usuário alterado com sucesso!!",
             icon: "success"
-          });
+          });          
           this.getUsers();
         }
-      }      
+      }  
+      else{
+        this.getUsers();
+      }    
     });
   }
 

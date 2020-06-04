@@ -21,6 +21,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { InfouserComponent } from './components/usuarios/infouser/infouser.component';
 import { EdituserComponent } from './components/usuarios/edituser/edituser.component';
+import { ChangepasswordComponent } from './components/usuarios/changepassword/changepassword.component';
 
 
 
@@ -33,7 +34,8 @@ import { EdituserComponent } from './components/usuarios/edituser/edituser.compo
     EditunidadeComponent,
     UsuariosComponent,
     InfouserComponent,
-    EdituserComponent    
+    EdituserComponent,
+    ChangepasswordComponent    
   ],
   imports: [
     BrowserModule,

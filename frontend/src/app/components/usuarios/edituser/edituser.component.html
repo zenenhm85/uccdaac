@@ -13,7 +13,7 @@
             <p>
                 <mat-form-field appearance="outline" class="matform2">
                     <mat-label>Nome de Usuário</mat-label>
-                    <input matInput name="username" #username="ngModel" [(ngModel)]="data.username" (keypress)="restrictEspace($event)">
+                    <input matInput name="username" #username="ngModel" [(ngModel)]="user2.username" (keypress)="restrictEspace($event)">
                     <mat-hint align="end">Identificador do usuário para login</mat-hint>                    
                 </mat-form-field>
             </p> 
@@ -54,8 +54,7 @@
                     <small class="errorred" *ngIf="!phone.valid && phone.touched">O conteúdo não é
                         válido. Devem ser 9 dígitos</small>
                 </mat-form-field>
-            </p>
-            
+            </p>            
             <p>
                 <mat-form-field class="matform2">
                     <mat-label>Tipo de usuário</mat-label>

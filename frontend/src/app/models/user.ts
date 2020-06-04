@@ -1,5 +1,4 @@
-export class User{
-   
+export class User{   
     constructor(
         public name:string,
         public username:string,
@@ -27,4 +26,12 @@ export class UserCreate{
        
     }
 }    
-
+export class UserChangePassword{   
+    constructor(        
+        public username:string,
+        public passwordanterior:string,
+        public password:string,
+        public reppassword:string          
+        ){}
+}    
+  

@@ -4,6 +4,7 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Global } from '../../../services/url';
 import * as bcrypt from 'bcryptjs';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-edituser',
@@ -13,9 +14,11 @@ import * as bcrypt from 'bcryptjs';
 })
 export class EdituserComponent implements OnInit {
 
-  url: string;
-  img: string;
-  user: User
+  url: string;  
+  img2:string;
+  user: User;
+  user2:User;
+  id:string;
 
 
   afuConfig = {
@@ -46,26 +49,62 @@ export class EdituserComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EdituserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
     this.url = Global.url;
-    this.img = this.url + "users/img/";
-    this.user = this.data;
-    this.data.username = '';
+    
+    this.user = new User(this.data['data'].name,this.data['data'].username,this.data['data'].email,this.data['data'].phone,this.data['data'].habilitado,this.data['data'].tipo,this.data['data'].img);
+    this.user2 = new User(this.data['data'].name,this.data['data'].username,this.data['data'].email,this.data['data'].phone,this.data['data'].habilitado,this.data['data'].tipo,this.data['data'].img);
+    this.id = this.data['id'];  
+    this.user2.username = '' ; 
+    this.img2 = this.user2.img;     
+    
+    
   }
   editUser() {
-    this.data.username = this.data.username.replace(/\s/g, "").toLowerCase();
+    this.user2.username = this.user2.username.replace(/\s/g, "").toLowerCase();
+    if(this.user2.username!=''){
+      var saltu = bcrypt.genSaltSync(10);
+      var hashu = bcrypt.hashSync(this.user2.username, saltu);
+      this.user.username = hashu
+    }
+    this.userService.updateUser(this.id,this.user).subscribe(
+      res => {
+         
+      },
+      err => console.log(err)
+    );    
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  onNoClick(): void {    
+    this.dialogRef.close();  
   }
   imageUpload(imagen) {
-    this.user.img = imagen.body.filename;
-
+    this.user.img = imagen.body.filename;   
+    if(this.user.img != this.img2){
+      this.userService.deleteImage(this.img2).subscribe(
+        res => {          
+          if(res.result == true){
+            swal({
+              title: "Excelente!",
+              text: "Imagem trocada com êxito sucesso!!",
+              icon: "success"
+            });
+          }
+        },
+        err => console.log(err)
+      );
+      const usernew = new User(this.user2.name,this.user.username,this.user2.email,this.user2.phone,this.user2.habilitado,this.user2.tipo,this.user.img);
+      this.userService.updateUser(this.id,usernew).subscribe(
+        res => {
+           
+        },
+        err => console.log(err)
+      );    
+      this.img2 = this.user.img;
+    }    
   }
   public restrictNumeric(e) {
     let input;

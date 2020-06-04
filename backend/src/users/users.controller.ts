@@ -15,13 +15,26 @@ export class UsersController {
     @UseGuards(JwtAuthGuard)
     @Post('/create')
     async userCreate(@Res() res, @Body() createUserDTO: CreateUserDTO2) {
-
         const user = await this.userService.createUser(createUserDTO);
         return res.status(HttpStatus.OK).json({
             message: 'Usuário criado com sucesso',
             user
         });
-
+    } 
+    @UseGuards(JwtAuthGuard)   
+    @Post('/change')
+    async changePassword(@Res() res, @Body() passwordDTO: CreateUserDTO) {
+        const user = await this.userService.changePassword(passwordDTO);
+        return res.status(HttpStatus.OK).json({
+            user
+        });
+    }    
+    @Get('image/:img')
+    async deleteImg(@Res() res, @Param('img') img: string) {
+        const imgdelte = await this.userService.deleteImg(img);
+        return res.status(HttpStatus.OK).json({
+            result:true
+        });
     }
     @UseGuards(JwtAuthGuard)
     @Delete('/delete/:userID')
@@ -51,6 +64,17 @@ export class UsersController {
     @Get('/:username')
     async getUser(@Res() res, @Param('username') username: string) {
         const user = await this.userService.getUser(username);
+        if (!user) {
+            throw new NotFoundException('Este Usuário não existe');
+        }
+        return res.status(HttpStatus.OK).json({
+            user
+        });
+    }
+    @UseGuards(JwtAuthGuard)
+    @Get('userhash/:username')
+    async getUserhash(@Res() res, @Param('username') username: string) {
+        const user = await this.userService.getUserhash(username);
         if (!user) {
             throw new NotFoundException('Este Usuário não existe');
         }
