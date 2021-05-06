@@ -28,7 +28,7 @@
     "bcryptjs": "^2.4.3",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
-    "highcharts": "^8.1.0",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "jspdf": "^1.5.3",
     "rxjs": "~6.5.4",
